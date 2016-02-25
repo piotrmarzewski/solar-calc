@@ -9,15 +9,14 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<html lang="en">
+<html lang="">
 
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="generator" content="Polymer Starter Kit">
+  <meta name="generator" content="Polymer Starter Kit" />
   <title>Polymer Starter Kit</title>
-
   <!-- Place favicon.ico in the `app/` directory -->
 
   <!-- Chrome for Android theme color -->
@@ -51,15 +50,76 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <!-- endbuild -->
 
-  <!-- Because this project uses vulcanize this should be your only html import
-       in this file. All other imports should go in elements.html -->
+  <!-- will be replaced with elements/elements.vulcanized.html -->
   <link rel="import" href="elements/elements.html">
+  <!-- endreplace-->
 
   <!-- For shared styles, shared-styles.html import in elements.html -->
-  <style is="custom-style" include="shared-styles"></style>
+  <style is="custom-style" include="shared-styles">
+    paper-card {
+
+      margin-bottom: 10px;
+
+    }
+    #parameters paper-card {
+      width: 49.5%;
+    }
+
+    paper-slider {
+      width: 100%;
+      margin: 0;
+    }
+    paper-button {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+
+  </style>
+  <style is="custom-style">
+    paper-button.custom {
+      --paper-button-ink-color: var(--paper-pink-a200);
+      /* These could also be individually defined for each of the
+        specific css classes, but we'll just do it once as an example */
+      --paper-button-flat-keyboard-focus: {
+        background-color: var(--paper-pink-a200);
+        color: white !important;
+      };
+      --paper-button-raised-keyboard-focus: {
+        background-color: var(--paper-pink-a200) !important;
+        color: white !important;
+      };
+    }
+    paper-button.custom:hover {
+      background-color: var(--paper-indigo-200);
+    }
+    paper-button.pink {
+      color: var(--paper-pink-a200);
+
+    }
+    paper-button.indigo {
+      background-color: var(--paper-indigo-500);
+      color: white;
+      --paper-button-raised-keyboard-focus: {
+        background-color: var(--paper-pink-a200) !important;
+        color: white !important;
+      };
+    }
+    paper-button.green {
+      background-color: var(--paper-green-500);
+      color: white;
+    }
+    paper-button.green[active] {
+      background-color: var(--paper-red-500);
+    }
+    paper-button.disabled {
+      color: white;
+    }
+  </style>
+
+
 </head>
 
-<body unresolved>
+<body unresolved class="fullbleed layout vertical">
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
 
@@ -69,11 +129,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
-          <span class="menu-name">Menu</span>
+          <span class="paper-font-title">Menu</span>
         </paper-toolbar>
 
         <!-- Drawer Content -->
-        <paper-menu attr-for-selected="data-route" selected="[[route]]">
+        <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
           <a data-route="home" href="{{baseUrl}}">
             <iron-icon icon="home"></iron-icon>
             <span>Home</span>
@@ -93,46 +153,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <!-- Main Area -->
       <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+
         <!-- Main Toolbar -->
         <paper-toolbar id="mainToolbar" class="tall">
           <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-
-          <span class="space"></span>
+          <span class="flex"></span>
 
           <!-- Toolbar icons -->
           <paper-icon-button icon="refresh"></paper-icon-button>
           <paper-icon-button icon="search"></paper-icon-button>
 
           <!-- Application name -->
-          <div class="middle middle-container">
+          <div class="middle middle-container center horizontal layout">
             <div class="app-name">Polymer Starter Kit</div>
           </div>
 
           <!-- Application sub title -->
-          <div class="bottom bottom-container">
-            <div class="bottom-title">The future of the web today</div>
+          <div class="bottom bottom-container center horizontal layout">
+            <div class="bottom-title paper-font-subhead">The future of the web today</div>
           </div>
+
         </paper-toolbar>
 
         <!-- Main Content -->
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
+
             <section data-route="home">
               <paper-material elevation="1">
                 <my-greeting></my-greeting>
-                <button onclick="app.$.list.showAnim()">show</button>
-                <button onclick="app.$.list.hideAnim()">hide</button>
-                <p class="subhead">You now have:</p>
-                <my-list id="list"></my-list>
 
-                <p>Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
+
+                <p class="paper-font-subhead">You now have:</p>
+                <my-list></my-list>
+
+                <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
+              </paper-material>
+              <paper-material elevation="1">
+                <p class="paper-font-body2">This is another card.</p>
               </paper-material>
 
-              <paper-material elevation="1">
-                <p>This is another card.</p>
-              </paper-material>
-
-              <paper-material elevation="1">
+              <paper-material elevation="1" class="paper-font-body2">
                 <h1 id="license">License</h1>
                 <p>Everything in this repo is BSD style license unless otherwise specified.</p>
                 <p>Copyright (c) 2015 The Polymer Authors. All rights reserved.</p>
@@ -150,32 +211,157 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </ul>
                 <p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
               </paper-material>
+
             </section>
 
             <section data-route="users">
               <paper-material elevation="1">
                 <h2 class="page-title">Users</h2>
+                <input type="month"   is="iron-input" bind-value="{{myValue}}"><div>Input:<span>{{myValue}}</span></div>
+               <paper-input label="Label" type="month"></paper-input>
+
                 <p>This is the users section</p>
                 <a href$="{{baseUrl}}users/Addy">Addy</a><br>
                 <a href$="{{baseUrl}}users/Rob">Rob</a><br>
                 <a href$="{{baseUrl}}users/Chuck">Chuck</a><br>
                 <a href$="{{baseUrl}}users/Sam">Sam</a>
+                <a href$="{{baseUrl}}users/Sam/edit">edit</a><br>
               </paper-material>
             </section>
 
-            <section data-route="user-info">
+           <section data-route="user-info">
               <paper-material elevation="1">
                 <h2 class="page-title">User: {{params.name}}</h2>
                 <div>This is {{params.name}}'s section</div>
               </paper-material>
             </section>
 
-            <section data-route="contact">
+            <section data-route="user-edit">
               <paper-material elevation="1">
-                <h2 class="page-title">Contact</h2>
-                <p>This is the contact section</p>
+                <h2 class="page-title">User: {{params.name}}</h2>
+                <div>This is {{params.name}}'s edit page</div>
+                <paper-input label="User name" value="{{params.name}}"></paper-input>
+
+
+                <paper-button class="custom green" on-tap="changeName" value="{{params.name}}">Zatwierdź</paper-button>
+
+                <paper-button active on-tap="anuluj" class="custom pink">link</paper-button>
+                <paper-button raised class="custom indigo">Anuluj</paper-button>
+                <paper-button toggles raised class="custom green">toggles</paper-button>
+                <paper-button disabled class="custom disabled">disabled</paper-button>
+
+
+
               </paper-material>
             </section>
+
+            <section data-route="contact">
+
+              <paper-material elevation="1" >
+                <h2 class="page-title">Kalkulator</h2>
+                <paper-material id="parameters" elevation="1" >
+
+                  <h3>Parametry</h3>
+                    <div class="layout horizontal">
+                      <paper-card heading="Lokalizacja" class="flex">
+                        <div class="card-content">
+                          <div>
+                          <span> Longitude: </span><span id="Longitude" class="caption">{{parameters.lat}}</span><br>
+                          <span> Latitude: </span><span id="Longitude" class="caption">{{parameters.lon}}</span><br>
+                          <span> Stacja meteo: </span><span id="Longitude" class="caption">{{answer.station_info.city}}</span><br>
+                          </div>
+                          <google-map id="mapa"
+                            latitude="53.8"
+                            longitude="20"
+                            clickEvents zoom="6"
+                            draggable="false"
+                            style="width:100%;height:200px;margin:3px;">
+                              <google-map-marker id="mapamarker" latitude="{{parameters.lat}}" longitude="{{parameters.lon}}" draggable="true"></google-map-marker>
+                          </google-map>
+                        </div>
+
+                      <div class="card-actions">
+                        <paper-button>Some action</paper-button>
+                        </div>
+                      </paper-card>
+                    </div>
+
+                    <div class="layout wrap">
+                      <paper-card heading="Pochylenie" image="" elevation="1" animated-shadow="false">
+                        <div class="card-content">
+                            <div>Tilt: <span id="tilt-val" class="caption">{{parameters.tilt}}</span><br>
+                            <paper-slider id="tiltslider" value={{parameters.tilt}} pin max="90" class="orange"></paper-slider></div>
+                        </div>
+                        <div class="card-actions">
+                          Akcja
+                        </div>
+                      </paper-card>
+
+                      <paper-card heading="Azymut" image="" elevation="1" animated-shadow="false">
+                        <div class="card-content">
+                            <div>Azimuth: <span id="azimuthlabel" class="caption">{{parameters.azimuth}}</span><br>
+                            <paper-slider id="azimuth" pin snaps min="0" max="359" max-markers="10" step="10" value="{{parameters.azimuth}}" class="orange"></paper-slider></div>
+                        </div>
+                        <div class="card-actions">
+                          Akcja
+                        </div>
+                      </paper-card>
+
+                      <paper-card heading="Typ modułu" image="" elevation="1" animated-shadow="false">
+                        <div class="card-content">
+                            <div>Typ modułu: <span id="module-type-label" class="caption">{{parameters.module_type}}</span><br>
+                            <paper-slider id="module-type" pin snaps min="0" max="2" max-markers="5" step="1" value="{{parameters.module_type}}" class="orange"></paper-slider></div>
+                        </div>
+                        <div class="card-actions">
+                          Akcja
+                        </div>
+                      </paper-card>
+                      <paper-card heading="Moc systemu  " image="" elevation="1" animated-shadow="false">
+                        <div class="card-content">
+                            <div>Moc systemu: <span id="system-capacity-label"
+                            class="caption">{{parameters.system_capacity}}</span><br>
+                            <paper-slider id="system-capacity" pin snaps min="1" max="20" step="1"
+                            value="{{parameters.system_capacity}}" class="orange"></paper-slider></div>
+                        </div>
+                        <div class="card-actions">
+                          Akcja
+                        </div>
+                      </paper-card>
+                    </div>
+
+                  </paper-material>
+
+
+                  <nrel-answer params={{parameters}} answer="{{answer}}"></nrel-answer>
+                  <paper-card heading="POA miesięcznie" image="" elevation="1" animated-shadow="false">
+                    <div class="card-content">
+                      <monthly-chart
+                        rows='[[answer.outputs.poa_monthly]]'
+                        options='{"title": "POA miesięcznie","legend":"none"}'></monthly-chart>
+                    </div>
+                    <div class="card-actions">
+
+                    </div>
+                  </paper-card>
+                  <paper-card heading="Card title" image="" elevation="1" animated-shadow="false">
+                    <div class="card-content">
+                      <monthly-chart
+                          rows='[[answer.outputs.solrad_monthly]]'
+                          options='{"title": "Solrad monthly",
+                            "legend": "none", "theme": "maximized",
+                            "backgroundColor":"#A3CBE8"}'></monthly-chart>
+                    </div>
+                    <div class="card-actions">
+
+                    </div>
+                  </paper-card>
+
+
+                  <div>AC annual: {{answer.outputs.ac_annual}}</div>
+                  <b>STOP</b>
+              </paper-material>
+            </section>
+
           </iron-pages>
         </div>
       </paper-scroll-header-panel>
@@ -195,7 +381,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <platinum-sw-register auto-register
                           clients-claim
                           skip-waiting
-                          base-uri="bower_components/platinum-sw/bootstrap"
                           on-service-worker-installed="displayInstalledToast">
       <platinum-sw-cache default-cache-strategy="fastest"
                          cache-config-file="cache-config.json">
@@ -204,10 +389,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     -->
 
   </template>
+  <script>
 
+    function getRandomGaugeValue(offset, factor) {
+      return offset + Math.round(factor * Math.random());
+    };
+
+
+  </script>
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
+
   <!-- endbuild-->
 </body>
 
 </html>
+z
