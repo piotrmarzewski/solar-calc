@@ -16,18 +16,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
+        display: inline-block;
+        border-radius: 50%;
+        width: 300px;
+        height: 300px;
+        background: orange;
       }
 
       span {
         @apply(--paper-font-body1);
       }
     </style>
-
-    <ul>
+    <ul id='special'> I am special!
       <template is="dom-repeat" items="{{items}}">
         <li><span>{{item}}</span></li>
       </template>
     </ul>
+
   </template>
 
   <script>
@@ -36,14 +41,40 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       Polymer({
         is: 'my-list',
-
+        behaviors: [
+          Polymer.NeonAnimationRunnerBehavior
+        ],
         properties: {
+          opened: {
+            type: Boolean
+          },
           items: {
             type: Array,
             notify: true,
+          },
+          animationConfig: {
+            type: Object,
+            value: function() {
+              return {
+                'entry': [{
+                  name: 'scale-up-animation',
+                  node: this
+                }],
+                'exit': [{
+                  name: 'scale-down-animation',
+                  node: this
+                }]
+              }
+            }
           }
         },
+        regularTap: function(e) {
+          alert("Thank you for tapping");
+        },
 
+        specialTap: function(e) {
+          alert("It was special tapping");
+        },
         ready: function() {
           this.items = [
             'Responsive Web App boilerplate',
@@ -53,7 +84,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             'Routing with Page.js',
             'Offline support with the Platinum Service Worker Elements'
           ];
+          return
+        },
+        listeners: {
+          'neon-animation-finish': '_onAnimationFinish',
+          'tap': 'regularTap'
+          // 'special.tap': 'specialTap'
+        },
+
+        _onAnimationFinish: function() {
+          console.log('ANIM FINISH');
+          if (!this.opened) {
+            console.log('ANIM opened');
+            this.style.display = 'none';
+          } else {
+            this.style.display = 'inline-block';
+          }
+        },
+
+        showAnim: function() {
+          console.log('ANIM SHOW');
+          this.opened = true;
+          this.style.display = 'inline-block';
+          this.playAnimation('entry');
+        },
+
+        hideAnim: function() {
+          // this.style.display = 'none';
+          console.log('ANIM HIDE');
+          this.opened = false;
+          this.playAnimation('exit');
         }
+
       });
     })();
   </script>
