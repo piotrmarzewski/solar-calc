@@ -87,6 +87,42 @@
     #calc-wrapper {
       width: 960px;
     }
+    paper-card .title-text {
+      color: #fff;
+      background-color: #7497E3;
+    }
+    .title-text {
+      color: #fff !important;
+      background-color: #7497E3;
+    }
+    paper-card {
+      --paper-card-header-color: #E3E8F3;
+      --paper-card-background-color: #4E7ADC;
+    }
+    paper-card .number {
+      background-color: rgb(227, 232, 243);
+    }
+    paper-card .card-content {
+      background-color: rgb(198, 211, 241);
+    }
+    paper-card .card-actions {
+      background-color: #98B5F7;
+      color: #E3E8F3;
+    }
+    paper-card .map {
+      background-color: rgb(198, 211, 241);
+      padding: 1px 7px 1px 0;
+    }
+    paper-card .chart {
+      background-color: rgb(198, 211, 241);
+    }
+    /*.card-actions.name {
+      background-color: #fff;
+    }
+    .card-actions.name {
+      color: #fff;
+      background-color: #7497E3;
+    }*/
   </style>
 
 
@@ -106,12 +142,12 @@
           <!-- <h3>Parametry</h3> -->
             <div class="layout horizontal">
               <paper-card heading="Lokalizacja" class="flex">
-                <div class="card-content">
-                  <div>
+                <div class="map">
+                  <!-- <div>
                   <span> Longitude: </span><span id="Longitude" class="caption">{{parameters.lat}}</span>
                   <span> Latitude: </span><span id="Longitude" class="caption">{{parameters.lon}}</span>
                   <span> Stacja meteo: </span><span id="Longitude" class="caption">{{answer.station_info.city}}</span>
-                  </div>
+                  </div> -->
                   <google-map id="mapa"
                     latitude="53.8"
                     longitude="20"
@@ -128,7 +164,7 @@
             </div>
 
             <div class="layout wrap">
-              <paper-card heading="Pochylenie" image="" elevation="1" animated-shadow="false" class="small">
+              <paper-card heading="Nachylenie" image="" elevation="1" animated-shadow="false" class="small">
                 <div class="number">
                   <span id="tilt-val" class="caption">{{parameters.tilt}}</span><span class="deg">&deg;</span>
                 </div>
@@ -161,7 +197,9 @@
                   Akcja
                 </div>
               </paper-card> -->
-              <paper-card heading="Moc systemu  " image="" elevation="1" animated-shadow="false" class="small last">
+
+              <!-- CAPACITY -->
+              <paper-card heading="Moc systemu" image="" elevation="1" animated-shadow="false" class="small last">
                 <div class="number">
                   <span id="tilt-val" class="caption">{{parameters.system_capacity}}</span><span class="unit">kW</span>
                 </div>
@@ -180,13 +218,16 @@
 
           <nrel-answer params={{parameters}} answer="{{answer}}"></nrel-answer>
           <paper-card heading="POA miesięcznie" image="" elevation="1" animated-shadow="false">
-            <div class="card-content">
+            <div class="chart">
               <monthly-chart
                 rows='[[answer.outputs.poa_monthly]]'
                 options='{"title": "POA miesięcznie","legend":"none"}'></monthly-chart>
             </div>
+            <div class="card-content">
+                <div>AC annual: {{answer.outputs.ac_annual}}</div>
+            </div>
             <div class="card-actions">
-
+              <paper-button>informacje</paper-button>
             </div>
           </paper-card>
           <!-- <paper-card heading="Card title" image="" elevation="1" animated-shadow="false">
@@ -203,8 +244,6 @@
           </paper-card> -->
 
 
-          <div>AC annual: {{answer.outputs.ac_annual}}</div>
-          <b>STOP</b>
       </paper-material>
     </section>
 
